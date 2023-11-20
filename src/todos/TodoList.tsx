@@ -5,9 +5,10 @@ import TodoForm from './TodoForm';
 
 interface TodoListProps {
   todos: Todo[];
+  onSave: (todo: Todo) => void;
 }
 
-function TodoList({ todos }: TodoListProps) {
+function TodoList({ todos, onSave }: TodoListProps) {
     const handleEdit = (todo: Todo) => {
         console.log('handle edit', todo);
         setTodoBeingEdited(todo);
@@ -21,7 +22,7 @@ function TodoList({ todos }: TodoListProps) {
               {todos.map((todo) => (
                 <div key={todo.id} className="cols-sm">
                 {todo === todoBeingEdited ? (
-                   <TodoForm onCancel={cancelEditing} />
+                   <TodoForm onCancel={cancelEditing} onSave={onSave} todo={todo} />
                 ) : (
                    <TodoCard todo={todo} onEdit={handleEdit} />
                 )}
