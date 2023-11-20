@@ -8,13 +8,13 @@ function formatDescription(description: string): string {
   interface TodoCardProps {
     todo: Todo;
     onEdit: (todo: Todo) => void;
+    onComplete: (todo: Todo) => void;
   }
 
   function TodoCard(props: TodoCardProps) {
-    const { todo, onEdit } = props;
+    const { todo, onEdit, onComplete } = props;
     const handleCompleteClick = (todoComplete: Todo) => {
-        console.log(todoComplete);
-        todoComplete.completed = true;
+        onComplete(todoComplete);
     };
     const handleEditClick = (todoEdit: Todo) => {
         onEdit(todoEdit);

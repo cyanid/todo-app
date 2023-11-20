@@ -3,3 +3,7 @@
 form {
   min-width: 300px;
 }
+
+a {
+  cursor: pointer;
+}
