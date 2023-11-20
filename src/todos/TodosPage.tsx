@@ -22,6 +22,15 @@ function TodosPage() {
         todo.completed = true;
         saveTodo(todo);
     };
+    const deleteTodo = (todo: Todo) => {
+        console.log('deleting todo', todo);
+        for (let [i, t] of todos.entries()) {
+            if (t.id === todo.id) {
+                todos.splice(i, 1);
+            }
+        }
+        setTodos(todos);
+    };
     const cancelCreate = () => {
         setCreateNew(false);
     };
@@ -44,7 +53,7 @@ function TodosPage() {
              {createNew ? (
                 <TodoForm onCancel={cancelCreate} onSave={saveTodo} todo={new Todo()} />
              ) : (
-                <TodoList todos={todos} onSave={saveTodo} onComplete={completeTodo} />
+                <TodoList todos={todos} onSave={saveTodo} onComplete={completeTodo} onDelete={deleteTodo} />
              )}
             
            </>

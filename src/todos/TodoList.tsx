@@ -7,9 +7,10 @@ interface TodoListProps {
   todos: Todo[];
   onSave: (todo: Todo) => void;
   onComplete: (todo: Todo) => void;
+  onDelete: (todo: Todo) => void;
 }
 
-function TodoList({ todos, onSave, onComplete }: TodoListProps) {
+function TodoList({ todos, onSave, onComplete, onDelete }: TodoListProps) {
     const handleEdit = (todo: Todo) => {
         console.log('handle edit', todo);
         setTodoBeingEdited(todo);
@@ -25,7 +26,7 @@ function TodoList({ todos, onSave, onComplete }: TodoListProps) {
                 {todo === todoBeingEdited ? (
                    <TodoForm onCancel={cancelEditing} onSave={onSave} todo={todo} />
                 ) : (
-                   <TodoCard todo={todo} onEdit={handleEdit} onComplete={onComplete} />
+                   <TodoCard todo={todo} onEdit={handleEdit} onComplete={onComplete} onDelete={onDelete} />
                 )}
                 </div>
               ))}

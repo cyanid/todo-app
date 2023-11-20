@@ -9,10 +9,11 @@ function formatDescription(description: string): string {
     todo: Todo;
     onEdit: (todo: Todo) => void;
     onComplete: (todo: Todo) => void;
+    onDelete: (todo: Todo) => void;
   }
 
   function TodoCard(props: TodoCardProps) {
-    const { todo, onEdit, onComplete } = props;
+    const { todo, onEdit, onComplete, onDelete } = props;
     const handleCompleteClick = (todoComplete: Todo) => {
         onComplete(todoComplete);
     };
@@ -39,6 +40,12 @@ function formatDescription(description: string): string {
             }}>
                 <span className="icon-alert "></span>
                 Edit
+            </button>
+            <button className=" bordered" onClick={() => {
+                onDelete(todo);
+            }}>
+                <span className="icon-alert "></span>
+                Delete
             </button>
         </section>
       </div>
