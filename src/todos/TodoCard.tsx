@@ -20,8 +20,8 @@ function formatDescription(description: string): string {
         onEdit(todoEdit);
     };
     return (
-      <div className="card">
-        <section className="section dark">
+      <div className={"card"}>
+        <section className={"section dark" + (todo.completed ? ' completed' : '')}>
           <h5 className="strong">
             <strong>{todo.title}</strong>
           </h5>

@@ -7,3 +7,7 @@ form {
 a {
   cursor: pointer;
 }
+
+section.completed {
+  background-color: greenyellow !important;
+}
