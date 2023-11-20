@@ -7,10 +7,9 @@ interface TodoListProps {
   todos: Todo[];
   onSave: (todo: Todo) => void;
   onComplete: (todo: Todo) => void;
-  createNew: boolean;
 }
 
-function TodoList({ todos, onSave, onComplete, createNew }: TodoListProps) {
+function TodoList({ todos, onSave, onComplete }: TodoListProps) {
     const handleEdit = (todo: Todo) => {
         console.log('handle edit', todo);
         setTodoBeingEdited(todo);
@@ -23,7 +22,7 @@ function TodoList({ todos, onSave, onComplete, createNew }: TodoListProps) {
             <div className="row">
               {todos.map((todo) => (
                 <div key={todo.id} className="cols-sm">
-                {todo === todoBeingEdited || createNew ? (
+                {todo === todoBeingEdited ? (
                    <TodoForm onCancel={cancelEditing} onSave={onSave} todo={todo} />
                 ) : (
                    <TodoCard todo={todo} onEdit={handleEdit} onComplete={onComplete} />

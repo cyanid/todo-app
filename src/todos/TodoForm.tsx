@@ -20,11 +20,8 @@ function TodoForm({ onCancel, onSave, todo: initialTodo }: TodoFormProps) {
     };
     const handleChange = (event: any) => {
         const { type, name, value, checked } = event.target;
-        // if input type is checkbox use checked
-        // otherwise it's type is text, number etc. so use value
         let updatedValue = type === 'checkbox' ? checked : value;
     
-        //if input type is number convert the updatedValue string to a number
         if (type === 'number') {
             updatedValue = Number(updatedValue);
         }
@@ -35,6 +32,9 @@ function TodoForm({ onCancel, onSave, todo: initialTodo }: TodoFormProps) {
         let updatedTodo: Todo;
         setTodo((t) => {
             updatedTodo = new Todo({ ...t, ...change });
+            if (!updatedTodo.id) {
+                updatedTodo.id = Math.random();
+            }
             return updatedTodo;
         });
         setErrors(() => validate(updatedTodo));
@@ -45,7 +45,7 @@ function TodoForm({ onCancel, onSave, todo: initialTodo }: TodoFormProps) {
             errors.title = 'Title is required';
         }
         if (todo.title.length > 0 && todo.title.length < 3) {
-            errors.title = 'Title needs to be at least 3 characters.';
+            errors.title = 'Title needs to be at least 3 characters in length.';
         }
         if (todo.description.length === 0) {
             errors.description = 'Description is required.';

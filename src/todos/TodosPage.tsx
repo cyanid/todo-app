@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { MOCK_TODOS } from './MockTodos';
+import React, { useState, useEffect } from 'react';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
 import { Todo } from './Todo';
 
 function TodosPage() {
-    const [todos, setTodos] = useState<Todo[]>(MOCK_TODOS);
+    const savedTodos = JSON.parse(localStorage.getItem('todos') || '[]');
+    const [todos, setTodos] = useState<Todo[]>(savedTodos);
     const [createNew, setCreateNew] = useState<boolean>(false);
     const saveTodo = (todo: Todo) => {
         console.log('saving todo', todo);
@@ -25,6 +25,10 @@ function TodosPage() {
     const cancelCreate = () => {
         setCreateNew(false);
     };
+    useEffect(() => {
+        console.log('saving todos to local storage');
+        localStorage.setItem('todos', JSON.stringify(todos));
+    }, [todos]);
     
     return (
            <>
@@ -34,10 +38,13 @@ function TodosPage() {
                     setCreateNew(true);
                 }}>+ Create new</a>
              </p>
+             {todos.length === 0 &&
+                <p>No todos yet.</p>
+            }
              {createNew ? (
                 <TodoForm onCancel={cancelCreate} onSave={saveTodo} todo={new Todo()} />
              ) : (
-                <TodoList todos={todos} onSave={saveTodo} onComplete={completeTodo} createNew={createNew} />
+                <TodoList todos={todos} onSave={saveTodo} onComplete={completeTodo} />
              )}
             
            </>
