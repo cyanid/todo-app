@@ -12,7 +12,6 @@ interface TodoListProps {
 
 function TodoList({ todos, onSave, onComplete, onDelete }: TodoListProps) {
     const handleEdit = (todo: Todo) => {
-        console.log('handle edit', todo);
         setTodoBeingEdited(todo);
     };
     const cancelEditing = () => {

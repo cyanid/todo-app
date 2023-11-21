@@ -8,7 +8,6 @@ function TodosPage() {
     const [todos, setTodos] = useState<Todo[]>(savedTodos);
     const [createNew, setCreateNew] = useState<boolean>(false);
     const saveTodo = (todo: Todo) => {
-        console.log('saving todo', todo);
         let updatedTodos = todos.map((t: Todo) => {
             return t.id === todo.id ? todo : t;
         });
@@ -23,18 +22,15 @@ function TodosPage() {
         saveTodo(todo);
     };
     const deleteTodo = (todo: Todo) => {
-        console.log('deleting todo', todo);
         let deleteTodos = todos.filter(t => { 
             return t !== todo; 
         });
-        console.log('setting todos after deletion', deleteTodos);
         setTodos(deleteTodos);
     };
     const cancelCreate = () => {
         setCreateNew(false);
     };
     useEffect(() => {
-        console.log('saving todos to local storage');
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
     
@@ -42,9 +38,9 @@ function TodosPage() {
            <>
              <h1>Todos</h1>
              <p>
-                <a onClick={() => {
+                <button className='bordered' onClick={() => {
                     setCreateNew(true);
-                }}>+ Create new</a>
+                }}>+ Create new</button>
              </p>
              {todos.length === 0 &&
                 <p>No todos yet.</p>
