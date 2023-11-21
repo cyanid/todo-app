@@ -24,12 +24,11 @@ function TodosPage() {
     };
     const deleteTodo = (todo: Todo) => {
         console.log('deleting todo', todo);
-        for (let [i, t] of todos.entries()) {
-            if (t.id === todo.id) {
-                todos.splice(i, 1);
-            }
-        }
-        setTodos(todos);
+        let deleteTodos = todos.filter(t => { 
+            return t !== todo; 
+        });
+        console.log('setting todos after deletion', deleteTodos);
+        setTodos(deleteTodos);
     };
     const cancelCreate = () => {
         setCreateNew(false);
